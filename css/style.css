@@ -37,9 +37,6 @@ section#score div {
   margin: 1em auto;
 }
 
-
-
-
 .furry {
   background-image: url('../images/furry.png');
   background-repeat: no-repeat;
@@ -59,7 +56,7 @@ section#over {
   top: 0;
   z-index: 1;
   padding: 10px;
-  background-color: rgba(255, 255, 0, 0.75);
+  background-color: rgba(255, 255, 0, 0.50);
 }
 
 section#over pre {
@@ -69,6 +66,29 @@ section#over pre {
   font-size: 10px;
   font-weight: bolder;
   color: brown;
+}
+
+#start {
+  font-size: 30px;
+  color: red;
+  text-align: center;
+}
+
+.pulsate {
+  -webkit-animation: pulsate 1s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  opacity: 0.5;
+}
+@-webkit-keyframes pulsate {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1.0;
+  }
+  100% {
+    opacity: 0.5;
+  }
 }
 
 .invisible {
