@@ -153,17 +153,18 @@ document.addEventListener("DOMContentLoaded", function () {
     newGame.showBomb();
     // newGame.startGame();
 
-    document.addEventListener('keydown', function(event) {
-        newGame.turnFury(event);
-    });
-
     document.addEventListener('keydown', function (event) {
         var b = event.which;
         var start = document.getElementById("start");
         if (b === 13) {
             newGame.startGame();
+            start.classList.add('invisible');
 
         }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        newGame.turnFury(event);
     });
 
 });
