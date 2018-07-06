@@ -1,7 +1,9 @@
+import '../scss/stye.scss';
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Wszystko działa!");
-    var score = document.querySelector("#score div strong");
-    var xxx = document.querySelector(".endWindow h3");
+    let score = document.querySelector("#score div strong");
+    let xxx = document.querySelector(".endWindow h3");
 
 
     //constructors
