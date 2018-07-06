@@ -88,7 +88,7 @@ module.exports = {
 			filename: 'index.html',
 			template: 'index.html'
 		}),
-		//merges all CSS files into one app.css file
+		//merges all CSS files into one stye.scss file
 		new MiniCssExtractPlugin({
 			filename: 'app.css'
 		})
