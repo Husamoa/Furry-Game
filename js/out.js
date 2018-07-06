@@ -1,1 +1,101 @@
-!function(t){var r={};function e(i){if(r[i])return r[i].exports;var n=r[i]={i:i,l:!1,exports:{}};return t[i].call(n.exports,n,n.exports,e),n.l=!0,n.exports}e.m=t,e.c=r,e.d=function(t,r,i){e.o(t,r)||Object.defineProperty(t,r,{enumerable:!0,get:i})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,r){if(1&r&&(t=e(t)),8&r)return t;if(4&r&&"object"==typeof t&&t&&t.__esModule)return t;var i=Object.create(null);if(e.r(i),Object.defineProperty(i,"default",{enumerable:!0,value:t}),2&r&&"string"!=typeof t)for(var n in t)e.d(i,n,function(r){return t[r]}.bind(null,n));return i},e.n=function(t){var r=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(r,"a",r),r},e.o=function(t,r){return Object.prototype.hasOwnProperty.call(t,r)},e.p="",e(e.s=0)}([function(t,r){function e(){this.x=Math.floor(10*Math.random()),this.y=Math.floor(10*Math.random())}console.log("hello");var i=new function(){self=this,this.scoreElement=document.querySelector("#score div strong"),console.log(this.scoreElement),this.board=document.querySelectorAll("section#board div"),this.furry=new function(){this.x=0,this.y=0,this.direction="right"},this.coin=new e,this.score=0,this.index=function(t,r){return t+10*r},this.showFurry=function(){this.hideVisibleFurry(),this.board[this.index(this.furry.x,this.furry.y)].classList.add("furry")},this.hideVisibleFurry=function(){var t=document.querySelector(".furry");null!==t&&t.classList.remove("furry")},this.showCoin=function(){this.board[this.index(this.coin.x,this.coin.y)].classList.add("coin")},this.moveFurry=function(){"right"===this.furry.direction?this.furry.x=this.furry.x+1:"left"===this.furry.direction?this.furry.x=this.furry.x-1:"down"===this.furry.direction?this.furry.y=this.furry.y+1:"up"===this.furry.direction&&(this.furry.y=this.furry.y-1),!1===this.gameOver()?(this.showFurry(),this.checkCoinCollision()):(document.querySelector("#board").classList.add("invisible"),document.querySelector("#over").classList.remove("invisible"),document.querySelector("#game-over").classList.remove("invisible"),document.querySelector("section#score").style.fontSize="45px",document.querySelector("#game-over").innerText="GAME OVER",clearInterval(this.intervalID),this.hideVisibleFurry())},this.turnFurry=function(t){switch(t.which){case 37:self.furry.direction="left";break;case 38:self.furry.direction="up";break;case 39:self.furry.direction="right";break;case 40:self.furry.direction="down"}},this.checkCoinCollision=function(){if(this.furry.x===this.coin.x&&this.furry.y===this.coin.y){var t=this.index(this.coin.x,this.coin.y);this.board[t].classList.remove("coin"),this.score++,this.scoreElement.innerText=this.score,this.coin=new e,this.showCoin()}},this.gameOver=function(){return this.furry.x<0||this.furry.x>9||this.furry.y<0||this.furry.y>9},this.startGame=function(t){this.intervalID=setInterval(function(){self.moveFurry()},250)}};i.showFurry(),i.showCoin(),document.addEventListener("keydown",function(t){var r=t.which,e=document.getElementById("start");13===r&&(i.startGame(),e.classList.add("invisible"))}),document.addEventListener("keydown",function(t){i.turnFurry(t)})}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./js/app.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./js/app.js":
+/*!*******************!*\
+  !*** ./js/app.js ***!
+  \*******************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\ndocument.addEventListener(\"DOMContentLoaded\", function () {\n    console.log(\"Wszystko działa!\");\n    var score = document.querySelector(\"#score div strong\");\n    var xxx = document.querySelector(\".endWindow h3\");\n\n    //constructors\n    function Furry() {\n        this.x = 0;\n        this.y = 0;\n        this.direction = \"right\";\n    };\n\n    function Coin() {\n        this.x = Math.floor(Math.random() * 10);\n        this.y = Math.floor(Math.random() * 10);\n    };\n\n    function Bomb() {\n        this.x = Math.floor(Math.random() * 10);\n        this.y = Math.floor(Math.random() * 10);\n    };\n\n    function Game() {\n        this.board = document.querySelectorAll(\"#board div\");\n        this.furry = new Furry();\n        this.coin = new Coin();\n        this.bomb = new Bomb();\n        this.score = 0;\n        this.index = function (x, y) {\n            return x + y * 10;\n        };\n\n        this.showFurry = function () {\n            this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');\n        };\n        this.hideVisibleFury = function () {\n            var elementWithClass = document.querySelector('.furry').classList.remove(\"furry\");\n        };\n\n        this.showCoin = function () {\n            this.board[this.index(this.coin.x, this.coin.y)].classList.add('coin');\n        };\n\n        this.showBomb = function () {\n            this.board[this.index(this.bomb.x, this.bomb.y)].classList.add('bomb');\n        };\n\n        this.startGame = function () {\n            var self = this;\n            this.idSetinterval = setInterval(function () {\n                self.hideVisibleFury();\n                self.moveFury();\n            }, 250);\n        };\n\n        this.moveFury = function () {\n            if (this.furry.direction === \"right\") {\n                this.furry.x = this.furry.x + 1;\n            } else if (this.furry.direction === \"left\") {\n                this.furry.x = this.furry.x - 1;\n            } else if (this.furry.direction === \"top\") {\n                this.furry.y = this.furry.y + 1;\n            } else if (this.furry.direction === \"bottom\") {\n                this.furry.y = this.furry.y - 1;\n            }\n            this.gameOver();\n            this.showFurry();\n            this.checkCoinCollision();\n        };\n\n        //change Furry move direction\n        this.turnFury = function (event) {\n            // console.log(this.furry.direction);\n            // this.furry.direction = \"bottom\"\n            switch (event.which) {\n                case 37:\n                    this.furry.direction = 'left';\n                    break;\n                case 38:\n                    this.furry.direction = 'bottom';\n                    break;\n                case 39:\n                    this.furry.direction = 'right';\n                    break;\n                case 40:\n                    this.furry.direction = 'top';\n            }\n        };\n        var newScore = 0;\n        this.checkCoinCollision = function () {\n            if (this.furry.x === this.coin.x && this.furry.y === this.coin.y) {\n                this.board[this.index(this.coin.x, this.coin.y)].classList.remove('coin');\n                newScore += 1;\n                score.innerText = newScore;\n                xxx.innerText = newScore;\n                this.coin = new Coin();\n                this.showCoin();\n                // this.levels();\n            }\n        };\n\n        //What happend on end of game\n\n        this.gameOver = function () {\n            if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9 || this.furry.x === this.bomb.x && this.furry.y === this.bomb.y) {\n                clearInterval(this.idSetinterval);\n                var over = document.querySelector(\"body\");\n                over.classList.add(\"endGame\");\n                document.querySelector('.bomb').classList.remove(\"bomb\");\n                document.querySelector('.coin').classList.remove(\"coin\");\n                var scoreDiv = document.querySelector(\"#score div\");\n                scoreDiv.innerText = \"\";\n                scoreDiv.style.backgroundColor = \"lightgray\";\n                scoreDiv.style.boxShadow = \"none\";\n                scoreDiv.style.border = \"none\";\n                document.querySelector(\".endWindow\").classList.remove(\"invisible\");\n                var buttonNewGame = document.querySelector(\".endWindow button\");\n                buttonNewGame.addEventListener(\"click\", function () {\n                    window.location.reload();\n                });\n            }\n        };\n\n        // //Game levels\n        // this.levels = function () {\n        //     if(score.innerText>4&&score.innerText<6){\n        //         this.bombOne = new Bomb();\n        //         this.board[this.index(this.bombOne.x, this.bombOne.y)].classList.add('bomb');\n        //\n        //     }else if(score.innerText>9&&score.innerText<11){\n        //         this.bombTwo = new Bomb();\n        //         this.board[this.index(this.bombTwo.x, this.bombTwo.y)].classList.add('bomb');\n        //     }else if(score.innerText>19&&score.innerText<20){\n        //         this.bombThird = new Bomb();\n        //         this.board[this.index(this.bombThird.x, this.bombThird.y)].classList.add('bomb');\n        //     }\n        // }\n    }\n\n    var newGame = new Game();\n    newGame.showFurry();\n    newGame.showCoin();\n    newGame.showBomb();\n    // newGame.startGame();\n\n    document.addEventListener('keydown', function (event) {\n        newGame.turnFury(event);\n    });\n\n    document.addEventListener('keydown', function (event) {\n        var b = event.which;\n        var start = document.getElementById(\"start\");\n        if (b === 13) {\n            newGame.startGame();\n        }\n    });\n});\n\n//# sourceURL=webpack:///./js/app.js?");
+
+/***/ })
+
+/******/ });
