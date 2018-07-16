@@ -26,12 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function Game() {
-        this.board = document.querySelectorAll("#board div")
+        this.board = document.querySelectorAll("#board div");
         this.furry = new Furry();
         this.coin = new Coin();
         this.bomb = new Bomb();
         this.score = 0;
-        this.index = function(x, y) {
+        this.index = function (x, y) {
             return x + (y * 10);
         };
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         this.startGame = function () {
             var self = this;
-            this.idSetinterval = setInterval(function() {
+            this.idSetinterval = setInterval(function () {
                 self.hideVisibleFury();
                 self.moveFury();
             }, 250);
@@ -60,15 +60,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         this.moveFury = function () {
-            if(this.furry.direction === "right") {
+            if (this.furry.direction === "right") {
                 this.furry.x = this.furry.x + 1;
-            } else if (this.furry.direction === "left"){
+            } else if (this.furry.direction === "left") {
                 this.furry.x = this.furry.x - 1;
-            } else if (this.furry.direction === "top"){
+            } else if (this.furry.direction === "top") {
                 this.furry.y = this.furry.y + 1;
-            }else if ((this.furry.direction === "bottom")){
+            } else if ((this.furry.direction === "bottom")) {
                 this.furry.y = this.furry.y - 1;
             }
+
+
             this.gameOver();
             this.showFurry();
             this.checkCoinCollision();
@@ -76,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         //change Furry move direction
-        this.turnFury = function(event) {
+        this.turnFury = function (event) {
             // console.log(this.furry.direction);
             // this.furry.direction = "bottom"
             switch (event.which) {
@@ -94,8 +96,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
         var newScore = 0;
-        this.checkCoinCollision = function(){
-            if(this.furry.x === this.coin.x && this.furry.y === this.coin.y){
+        this.checkCoinCollision = function () {
+            if (this.furry.x === this.coin.x && this.furry.y === this.coin.y) {
                 this.board[this.index(this.coin.x, this.coin.y)].classList.remove('coin');
                 newScore += 1;
                 score.innerText = newScore;
@@ -104,14 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 this.showCoin();
                 // this.levels();
             }
-        }
+        };
 
 
         //What happend on end of game
 
-        this.gameOver = function(){
-            if(this.furry.x<0 || this.furry.x>9||this.furry.y<0 || this.furry.y>9||
-                this.furry.x === this.bomb.x && this.furry.y === this.bomb.y){
+        this.gameOver = function () {
+            if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9 ||
+                this.furry.x === this.bomb.x && this.furry.y === this.bomb.y) {
                 clearInterval(this.idSetinterval)
                 var over = document.querySelector("body");
                 over.classList.add("endGame");
@@ -153,21 +155,17 @@ document.addEventListener("DOMContentLoaded", function () {
     newGame.showBomb();
     // newGame.startGame();
 
-    document.addEventListener('keydown', function(event) {
-        newGame.turnFury(event);
-    });
-
-    document.addEventListener('keydown', function (event) {
+    document.addEventListener('keypress', function (event) {
         var b = event.which;
         var start = document.getElementById("start");
         if (b === 13) {
             newGame.startGame();
-
+            start.classList.add('invisible');
         }
     });
 
+    document.addEventListener('keydown', function (event) {
+        newGame.turnFury(event);
+    });
+
 });
-
-
-
-
