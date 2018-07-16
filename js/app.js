@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
         };
         this.hideVisibleFury = function () {
-            var elementWithClass = document.querySelector('.furry').classList.remove("furry");
+            let elementWithClass = document.querySelector('.furry').classList.remove("furry");
         };
 
         this.showCoin = function () {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         this.startGame = function () {
-            var self = this;
+            let self = this;
             this.idSetinterval = setInterval(function () {
                 self.hideVisibleFury();
                 self.moveFury();
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     this.furry.direction = 'top';
             }
         };
-        var newScore = 0;
+        let newScore = 0;
         this.checkCoinCollision = function () {
             if (this.furry.x === this.coin.x && this.furry.y === this.coin.y) {
                 this.board[this.index(this.coin.x, this.coin.y)].classList.remove('coin');
@@ -115,22 +115,22 @@ document.addEventListener("DOMContentLoaded", function () {
             if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9 ||
                 this.furry.x === this.bomb.x && this.furry.y === this.bomb.y) {
                 clearInterval(this.idSetinterval)
-                var over = document.querySelector("body");
+                let over = document.querySelector("body");
                 over.classList.add("endGame");
                 document.querySelector('.bomb').classList.remove("bomb");
                 document.querySelector('.coin').classList.remove("coin");
-                var scoreDiv = document.querySelector("#score div");
+                let scoreDiv = document.querySelector("#score div");
                 scoreDiv.innerText = "";
                 scoreDiv.style.backgroundColor = "lightgray";
                 scoreDiv.style.boxShadow = "none";
                 scoreDiv.style.border = "none";
                 document.querySelector(".endWindow").classList.remove("invisible");
-                var buttonNewGame = document.querySelector(".endWindow button");
+                let buttonNewGame = document.querySelector(".endWindow button");
                 buttonNewGame.addEventListener("click", function () {
                     window.location.reload()
                 })
             }
-        }
+        };
 
         // //Game levels
         this.levels = function () {
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // this.board[this.index(this.bombTwo.x, this.bombTwo.y)].classList.add('bomb');
                 console.log("dupa2");
                 this.startGame= function () {
-                    var self = this;
+                    let self = this;
                     this.idSetinterval = setInterval(function() {
                         self.hideVisibleFury();
                         self.moveFury();
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // this.board[this.index(this.bombThird.x, this.bombThird.y)].classList.add('bomb');
                 console.log("dupa3");
                 this.startGame= function () {
-                    var self = this;
+                    let self = this;
                     this.idSetinterval = setInterval(function() {
                         self.hideVisibleFury();
                         self.moveFury();
@@ -167,20 +167,39 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    var newGame = new Game();
+    let newGame = new Game();
     newGame.showFurry();
     newGame.showCoin();
     newGame.showBomb();
     // newGame.startGame();
 
-    document.addEventListener('keypress', function (event) {
-        var b = event.which;
-        var start = document.getElementById("start");
-        if (b === 13) {
-            newGame.startGame();
-            start.classList.add('invisible');
-        }
+
+    //Rozpoczynanie gry na "enter"
+
+    // document.addEventListener('keypress', function (event) {
+    //     var b = event.which;
+    //     var start = document.getElementById("start");
+    //     if (b === 13) {
+    //         newGame.startGame();
+    //         start.classList.add('invisible');
+    //     }
+    // });
+
+    //Rozpoczynanie gry na kliknięcie myszką
+
+    const startNewGame = document.querySelector(".btn-start");
+    console.log(startNewGame);
+
+    startNewGame.addEventListener('click', function (event) {
+        let start = document.getElementById("start");
+        let startWindow = document.querySelector(".startWindow");
+        startWindow.classList.add("invisible");
+        newGame.startGame();
+        start.classList.add('invisible');
+
     });
+
+    // Poruszanie furym strzałkami
 
     document.addEventListener('keydown', function (event) {
         newGame.turnFury(event);
