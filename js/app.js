@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 xxx.innerText = newScore;
                 this.coin = new Coin();
                 this.showCoin();
-                // this.levels();
+                this.levels();
             }
         }
 
@@ -131,19 +131,37 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // //Game levels
-        // this.levels = function () {
-        //     if(score.innerText>4&&score.innerText<6){
-        //         this.bombOne = new Bomb();
-        //         this.board[this.index(this.bombOne.x, this.bombOne.y)].classList.add('bomb');
-        //
-        //     }else if(score.innerText>9&&score.innerText<11){
-        //         this.bombTwo = new Bomb();
-        //         this.board[this.index(this.bombTwo.x, this.bombTwo.y)].classList.add('bomb');
-        //     }else if(score.innerText>19&&score.innerText<20){
-        //         this.bombThird = new Bomb();
-        //         this.board[this.index(this.bombThird.x, this.bombThird.y)].classList.add('bomb');
-        //     }
-        // }
+        this.levels = function () {
+            if(score.innerText>4&&score.innerText<6){
+                // this.bombOne = new Bomb();
+                // this.board[this.index(this.bombOne.x, this.bombOne.y)].classList.add('bomb');
+                console.log("dupa1");
+                this.startGame.idSetinterval
+
+            }else if(score.innerText>9&&score.innerText<11){
+                // this.bombTwo = new Bomb();
+                // this.board[this.index(this.bombTwo.x, this.bombTwo.y)].classList.add('bomb');
+                console.log("dupa2");
+                this.startGame= function () {
+                    var self = this;
+                    this.idSetinterval = setInterval(function() {
+                        self.hideVisibleFury();
+                        self.moveFury();
+                    }, 2000);
+                };
+            }else if(score.innerText>19&&score.innerText<21){
+                // this.bombThird = new Bomb();
+                // this.board[this.index(this.bombThird.x, this.bombThird.y)].classList.add('bomb');
+                console.log("dupa3");
+                this.startGame= function () {
+                    var self = this;
+                    this.idSetinterval = setInterval(function() {
+                        self.hideVisibleFury();
+                        self.moveFury();
+                    }, 3000);
+                };
+            }
+        }
     }
 
 
