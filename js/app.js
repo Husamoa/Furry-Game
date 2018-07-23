@@ -35,11 +35,55 @@ document.addEventListener("DOMContentLoaded", function () {
             return x + (y * 10);
         };
 
+
+        let furryChracter = document.querySelector(".furry");
+        let pipBoyChracter = document.querySelector(".pip-boy");
+        let gokuChracter = document.querySelector(".goku");
+
+
+        //TUTAJ!!!!!!!!!!!!
+
+        let charactersMenu = document.querySelector(".charactersMenu").children;
+        console.log(charactersMenu);
+        for(let i=0; i<charactersMenu.length; i++){
+            charactersMenu[i].addEventListener("click", function () {
+                for(let j=0; j<charactersMenu.length; j++){
+                    if(charactersMenu[j].className.indexOf("choose") > -1){
+                        charactersMenu[j].classList.remove("choose");
+                    }
+                }
+                this.classList.toggle("choose");
+            })
+        }
+
+
         this.showFurry = function () {
-            this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
+            if(furryChracter.className.indexOf("choose")>-1){
+                this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
+            }else if (pipBoyChracter.className.indexOf("choose")>-1){
+                this.board[this.index(this.furry.x, this.furry.y)].classList.add('pip-boy');
+            }else if(gokuChracter.className.indexOf("choose")>-1){
+                this.board[this.index(this.furry.x, this.furry.y)].classList.add('goku');
+            }
+            // this.board[this.index(this.furry.x, this.furry.y)].classList.add('furry');
         };
+
         this.hideVisibleFury = function () {
-            let elementWithClass = document.querySelector('.furry').classList.remove("furry");
+            if(document.querySelector('.furry').className.indexOf("choose")!==-1){
+                document.querySelector('.furry').classList.remove("furry");
+            }else if (document.querySelector('.pip-boy').className.indexOf("choose")!==-1){
+                document.querySelector('.pip-boy').classList.remove("pip-boy");
+            }else if(document.querySelector('.goku').className.indexOf("choose")!==-1){
+                document.querySelector('.goku').classList.remove("goku");
+            }
+
+
+
+
+
+            // document.querySelector('.furry').classList.remove("furry");
+            // document.querySelector('.pip-boy').classList.remove("pip-boy");
+            // document.querySelector('.goku').classList.remove("goku");
         };
 
         this.showCoin = function () {
@@ -58,23 +102,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 250);
         };
 
+        //Move Furry! Poruszanie w lewo i w prawo itp.
+                    this.moveFury = function () {
+                        if (this.furry.direction === "right") {
+                            this.furry.x = this.furry.x + 1;
+                        } else if (this.furry.direction === "left") {
+                            this.furry.x = this.furry.x - 1;
+                        } else if (this.furry.direction === "top") {
+                            this.furry.y = this.furry.y + 1;
+                        } else if ((this.furry.direction === "bottom")) {
+                            this.furry.y = this.furry.y - 1;
+                        }
 
-        this.moveFury = function () {
-            if (this.furry.direction === "right") {
-                this.furry.x = this.furry.x + 1;
-            } else if (this.furry.direction === "left") {
-                this.furry.x = this.furry.x - 1;
-            } else if (this.furry.direction === "top") {
-                this.furry.y = this.furry.y + 1;
-            } else if ((this.furry.direction === "bottom")) {
-                this.furry.y = this.furry.y - 1;
-            }
 
-
-            this.gameOver();
-            this.showFurry();
-            this.checkCoinCollision();
-        };
+                        this.gameOver();
+                        this.showFurry();
+                        this.checkCoinCollision();
+                    };
 
 
         //change Furry move direction
@@ -95,6 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     this.furry.direction = 'top';
             }
         };
+
+
         let newScore = 0;
         this.checkCoinCollision = function () {
             if (this.furry.x === this.coin.x && this.furry.y === this.coin.y) {
@@ -109,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
 
-        //What happend on end of game
+        //What happened on the end of game
 
         this.gameOver = function () {
             if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9 ||
@@ -176,14 +222,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Rozpoczynanie gry na "enter"
 
-    // document.addEventListener('keypress', function (event) {
-    //     var b = event.which;
-    //     var start = document.getElementById("start");
-    //     if (b === 13) {
-    //         newGame.startGame();
-    //         start.classList.add('invisible');
-    //     }
-    // });
+        // document.addEventListener('keypress', function (event) {
+        //     var b = event.which;
+        //     var start = document.getElementById("start");
+        //     if (b === 13) {
+        //         newGame.startGame();
+        //         start.classList.add('invisible');
+        //     }
+        // });
 
     //Rozpoczynanie gry na kliknięcie myszką
 
@@ -196,10 +242,9 @@ document.addEventListener("DOMContentLoaded", function () {
         startWindow.classList.add("invisible");
         newGame.startGame();
         start.classList.add('invisible');
-
     });
 
-    // Poruszanie furym strzałkami
+    // Poruszanie furrym strzałkami
 
     document.addEventListener('keydown', function (event) {
         newGame.turnFury(event);
