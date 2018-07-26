@@ -11,18 +11,18 @@ document.addEventListener("DOMContentLoaded", function () {
         this.x = 0;
         this.y = 0;
         this.direction = "right";
-    };
+    }
 
 
     function Coin() {
         this.x = Math.floor(Math.random() * 10);
         this.y = Math.floor(Math.random() * 10);
-    };
+    }
 
     function Bomb() {
         this.x = Math.floor(Math.random() * 10);
         this.y = Math.floor(Math.random() * 10);
-    };
+    }
 
 
     function Game() {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let gokuChracter = document.querySelector(".goku");
 
 
-        //TUTAJ!!!!!!!!!!!!
+        //Zaznaczanie swojego Avatara!!!
 
         let charactersMenu = document.querySelector(".charactersMenu").children;
         console.log(charactersMenu);
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         charactersMenu[j].classList.remove("choose");
                     }
                 }
-                this.classList.toggle("choose");
+                this.classList.add("choose");
             })
         }
 
