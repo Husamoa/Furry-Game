@@ -234,15 +234,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Rozpoczynanie gry na kliknięcie myszką
 
+
+
     const startNewGame = document.querySelector(".btn-start");
     console.log(startNewGame);
 
+    let charactersMenu = document.querySelector(".charactersMenu").children;
     startNewGame.addEventListener('click', function () {
-        // let start = document.getElementById("start");
-        let startWindow = document.querySelector(".startWindow");
-        startWindow.classList.add("invisible");
-        newGame.startGame();
-        // start.classList.add('invisible');
+
+        //BEZ WYBRANEJ KLASY WYSWIETLI SIE ALERT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            if(charactersMenu[0].className.indexOf("choose")===-1 && charactersMenu[1].className.indexOf("choose")===-1 && charactersMenu[2].className.indexOf("choose")===-1){
+                alert("Wybierz Postać!!")
+            }else{
+                let startWindow = document.querySelector(".startWindow");
+                startWindow.classList.add("invisible");
+                newGame.startGame();
+            }
+
     });
 
     // Poruszanie furrym strzałkami
