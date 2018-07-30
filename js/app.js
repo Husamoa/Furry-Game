@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
         //Zaznaczanie swojego Avatara!!!
 
         let charactersMenu = document.querySelector(".charactersMenu").children;
-        console.log(charactersMenu);
         for (let i = 0; i < charactersMenu.length; i++) {
             charactersMenu[i].addEventListener("click", function () {
                 for (let j = 0; j < charactersMenu.length; j++) {
@@ -53,6 +52,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
                 this.classList.add("choose");
+
+                //Prototyp znikania opisu starego awatara! działa ale do ulepszenia!!
+
+                if (charactersMenu[i].classList.contains("furry")) {
+                    document.querySelector(".furry-info").classList.remove("invisible");
+                    document.querySelector(".pip-boy-info").classList.add("invisible");
+                    document.querySelector(".goku-info").classList.add("invisible");
+                }else if (charactersMenu[i].classList.contains("pip-boy")) {
+                    document.querySelector(".pip-boy-info").classList.remove("invisible");
+                    document.querySelector(".furry-info").classList.add("invisible");
+                    document.querySelector(".goku-info").classList.add("invisible");
+                }else if (charactersMenu[i].classList.contains("goku")) {
+                    document.querySelector(".goku-info").classList.remove("invisible");
+                    document.querySelector(".furry-info").classList.add("invisible");
+                    document.querySelector(".pip-boy-info").classList.add("invisible");
+                }
             })
         }
 
@@ -67,6 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
 
+        //Nalzeży uważać i nie dodawać już nigdzie w index.html klasy  furry!!! bo sie skopie!! Dodawać np furryBackground i bedzie git!
+        //To jest zrobione dobrze i diała, nie ruszać!
         this.hideVisibleFury = function () {
             if (furryChracter.className.indexOf("choose") > -1) {
                 document.querySelector(".furry").classList.remove("furry");
@@ -91,10 +108,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         this.startGame = function () {
             let self = this;
+            let timing = 250;
+            if (levelDiv.innerText === 2){
+                timing = 200;
+            }else if (levelDiv.innerText === 3){
+                timing = 150;
+            }
             this.idSetinterval = setInterval(function () {
                 self.hideVisibleFury();
                 self.moveFury();
-            }, 250);
+            }, timing);
         };
 
         //Move Furry! Poruszanie w lewo i w prawo itp.
@@ -166,6 +189,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 scoreDiv.style.backgroundColor = "lightgray";
                 scoreDiv.style.boxShadow = "none";
                 scoreDiv.style.border = "none";
+                document.getElementById('level').removeChild(document.getElementById('level').children[0]);
+                document.getElementById('avatar-info').removeChild(document.getElementById('avatar-info').children[0]);
                 document.querySelector(".endWindow").classList.remove("invisible");
                 let buttonNewGame = document.querySelector(".endWindow button");
                 buttonNewGame.addEventListener("click", function () {
@@ -185,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("dupa3");
                 levelDiv.innerText = 4;
             }
-        }
+        };
     }
 
 
@@ -209,15 +234,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Rozpoczynanie gry na kliknięcie myszką
 
+
+
     const startNewGame = document.querySelector(".btn-start");
     console.log(startNewGame);
 
+    let charactersMenu = document.querySelector(".charactersMenu").children;
     startNewGame.addEventListener('click', function () {
-        // let start = document.getElementById("start");
-        let startWindow = document.querySelector(".startWindow");
-        startWindow.classList.add("invisible");
-        newGame.startGame();
-        // start.classList.add('invisible');
+
+        //BEZ WYBRANEJ KLASY WYSWIETLI SIE ALERT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            if(charactersMenu[0].className.indexOf("choose")===-1 && charactersMenu[1].className.indexOf("choose")===-1 && charactersMenu[2].className.indexOf("choose")===-1){
+                alert("Wybierz Postać!!")
+            }else{
+                let startWindow = document.querySelector(".startWindow");
+                startWindow.classList.add("invisible");
+                newGame.startGame();
+            }
+
     });
 
     // Poruszanie furrym strzałkami
