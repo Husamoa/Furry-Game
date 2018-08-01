@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         this.y = 0;
         this.direction = "right";
         this.timing = 300;
+        this.life = 3;
     }
 
     function Coin() {
@@ -158,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function () {
             this.gameOver();
             this.showFurry();
             this.checkCoinCollision();
+            this.checkBombCollision();
         };
 
         this.moveBomb = function () {
@@ -168,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
             this.showBomb();
+            this.checkBombCollision();
             this.gameOver();
         };
 
@@ -206,14 +209,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
 
+        this.checkBombCollision = function () {
+            if(document.querySelector(".furry")===document.querySelector(".bomb")||
+                document.querySelector(".pip-boy")===document.querySelector(".bomb")||
+                document.querySelector(".goku")===document.querySelector(".bomb")){
+                this.furry.life = this.furry.life -1;
+                console.log(this.furry.life);
+            }
+        };
+
 
         //What happened on the end of game
 
         this.gameOver = function () {
             if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9 ||
-               document.querySelector(".furry")===document.querySelector(".bomb")||
-                document.querySelector(".pip-boy")===document.querySelector(".bomb")||
-                document.querySelector(".goku")===document.querySelector(".bomb")
+               this.furry.life === 0
             ) {
                 clearInterval(this.idSetinterval);
                 clearInterval(this.setBombInterval);
