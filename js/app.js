@@ -6,25 +6,28 @@ document.addEventListener("DOMContentLoaded", function () {
     let xxx = document.querySelector(".endWindow h3");
     let levelDiv = document.querySelector("#level div strong");
 
-
     //constructors
     function Furry() {
         this.x = 0;
         this.y = 0;
         this.direction = "right";
+        this.timing = 300;
     }
-
 
     function Coin() {
         this.x = Math.floor(Math.random() * 10);
         this.y = Math.floor(Math.random() * 10);
     }
 
+
     function Bomb() {
-        this.x = Math.floor(Math.random() * 10);
-        this.y = Math.floor(Math.random() * 10);
+        this.x = 99;
+        this.y = 0;
+        this.direction = "left";
     }
 
+
+    ///////////////////////////////////CAŁA GRA!!!!!!!!!!!//////////////////////////////////////////
 
     function Game() {
         this.board = document.querySelectorAll("#board div");
@@ -82,19 +85,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
 
-        //Nalzeży uważać i nie dodawać już nigdzie w index.html klasy  furry!!! bo sie skopie!! Dodawać np furryBackground i bedzie git!
+        //Należy uważać i nie dodawać już nigdzie w index.html klasy  furry!!! bo sie skopie!! Dodawać np furryBackground i bedzie git!
         //To jest zrobione dobrze i diała, nie ruszać!
+
         this.hideVisibleFury = function () {
             if (furryChracter.className.indexOf("choose") > -1) {
                 document.querySelector(".furry").classList.remove("furry");
-                // console.log("furyy");
             } else if (pipBoyChracter.className.indexOf("choose") > -1) {
                 document.querySelector(".pip-boy").classList.remove("pip-boy");
-                // console.log("pip");
             } else if (gokuChracter.className.indexOf("choose") > -1) {
                 document.querySelector(".goku").classList.remove("goku");
-                // console.log("goku");
             }
+        };
+
+        this.hideVisibleBomb = function () {
+            document.querySelector(".bomb").classList.remove("bomb");
         };
 
         this.showCoin = function () {
@@ -108,17 +113,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
         this.startGame = function () {
             let self = this;
-            let timing = 250;
-            if (levelDiv.innerText === 2){
-                timing = 200;
-            }else if (levelDiv.innerText === 3){
-                timing = 150;
-            }
+
+            this.setBombInterval = setInterval(function () {
+                self.hideVisibleBomb();
+                self.moveBomb();
+            }, 300);
+
             this.idSetinterval = setInterval(function () {
                 self.hideVisibleFury();
                 self.moveFury();
-            }, timing);
+            }, self.furry.timing);
+            function stopInt() {
+                clearInterval(this.idSetinterval)
+            }
+            if (score.innerText > 1 && score.innerText < 3){
+                stopInt();
+            }
         };
+
+
+        this.iterStupid = function () {
+            let self = this;
+            if (score.innerText > 1 && score.innerText < 3 && self.furry.timing !== 250) {
+                self.furry.timing = 250;
+                console.log(self.furry.timing);
+                self.startGame();
+            }
+        };
+
 
         //Move Furry! Poruszanie w lewo i w prawo itp.
         this.moveFury = function () {
@@ -138,11 +160,21 @@ document.addEventListener("DOMContentLoaded", function () {
             this.checkCoinCollision();
         };
 
+        this.moveBomb = function () {
+            if (this.bomb.direction === "left"){
+                this.bomb.x = this.bomb.x - 1;
+                if (this.bomb.x===1){
+                    this.bomb.x = 99;
+                }
+            }
+            this.showBomb();
+            this.gameOver();
+        };
+
+
 
         //change Furry move direction
         this.turnFury = function (event) {
-            // console.log(this.furry.direction);
-            // this.furry.direction = "bottom"
             switch (event.which) {
                 case 37:
                     this.furry.direction = 'left';
@@ -160,6 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         let newScore = 0;
+        //można zrobić takie samo checkcollision tylko dla bomby i np po wjechaniu zabierac jedno zycie postaci :)
         this.checkCoinCollision = function () {
             if (this.furry.x === this.coin.x && this.furry.y === this.coin.y) {
                 this.board[this.index(this.coin.x, this.coin.y)].classList.remove('coin');
@@ -178,8 +211,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         this.gameOver = function () {
             if (this.furry.x < 0 || this.furry.x > 9 || this.furry.y < 0 || this.furry.y > 9 ||
-                this.furry.x === this.bomb.x && this.furry.y === this.bomb.y) {
+               document.querySelector(".furry")===document.querySelector(".bomb")||
+                document.querySelector(".pip-boy")===document.querySelector(".bomb")||
+                document.querySelector(".goku")===document.querySelector(".bomb")
+            ) {
                 clearInterval(this.idSetinterval);
+                clearInterval(this.setBombInterval);
                 let over = document.querySelector("body");
                 over.classList.add("endGame");
                 document.querySelector('.bomb').classList.remove("bomb");
@@ -213,12 +250,13 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
+    //////////////////////////////////////////////////Koniec Gry!!!////////////////////////////////////////////////
 
     let newGame = new Game();
     newGame.showFurry();
     newGame.showCoin();
     newGame.showBomb();
-    // newGame.startGame();
+
 
 
     //Rozpoczynanie gry na "enter"
@@ -232,8 +270,8 @@ document.addEventListener("DOMContentLoaded", function () {
     //     }
     // });
 
-    //Rozpoczynanie gry na kliknięcie myszką
 
+    ///////////////////////////////////Rozpoczynanie gry na kliknięcie myszką///////////////////////////////////
 
 
     const startNewGame = document.querySelector(".btn-start");
@@ -259,5 +297,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('keydown', function (event) {
         newGame.turnFury(event);
     });
+
+    document.addEventListener("keydown", function () {
+        newGame.iterStupid();
+    })
 
 });
