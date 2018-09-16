@@ -1,5 +1,3 @@
-<img alt="Logo" src="http://coderslab.pl/svg/logo-coderslab.svg" width="400">
-
 # Furry Game
 
 > Gra została napisana na podstawie warsztatu stworzonego przez szkołę CodersLab.
@@ -14,7 +12,11 @@
 
 ## Czy gra jest fajna?
 
-> Jest spoko. 
+> Jest spoko.
+
+## Screenshot
+
+![Furry Game Screenshot](furry-screenshot.png?raw=true "Furry Game")
 
 **Gra została zmodyfikowana we współpracy Piotra Pirańskiego i Pawła Białka**
 
