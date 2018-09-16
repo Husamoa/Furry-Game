@@ -14,6 +14,12 @@
 
 > Jest spoko.
 
+## Technologie
+> - ES6
+> - HTML5
+> - Sass
+> - Webpack
+
 ## Screenshot
 
 ![Furry Game Screenshot](furry-screenshot.png?raw=true "Furry Game")
